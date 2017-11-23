@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="hn_logo.png">
+  <img src="hn_logo.png"><br/>
   <img src="https://travis-ci.org/Andrewnetwork/HeftyNumber.svg?branch=master">
 </p>
 
