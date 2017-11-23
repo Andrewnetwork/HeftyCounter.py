@@ -10,9 +10,18 @@ numerical optimization.
 **!This repo is under heavy development, please don't take anything as final or refined!**
 
 ## Features
-* Effortless base conversion. ❌
-* Vector representation of large numbers. ❌✅
+* Effortless base conversion. ✅
+* Vector representation of large numbers. ❌
 * Ability to count in any base. ❌
+
+## Basic Usage
+```
+k = 930929309293092930929309293092930929829823832898398239238298323832328398329839283982938928398329839829839829389283
+a = HeftyNumber(k,base=10)
+
+# Convert a to base 2. 
+print(a.bn(2))
+```
 
 ## Install 
 ```

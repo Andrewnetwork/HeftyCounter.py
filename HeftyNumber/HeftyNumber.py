@@ -2,20 +2,19 @@ import numpy as np
 import math
 
 class HeftyNumber:
-    def __init__(self,base:"integer base"=10,baseCoef:"[2,3] = 23"=[0]):
+    def __init__(self,baseCoef:"[2,3] = 23"=[0],base:"integer base"=10):
         self.base = base
 
         if type(baseCoef) is list:
-            self.baseCoef = np.array(baseCoef)
+            self.baseCoef = np.matrix(baseCoef)
         else:
             numStr = str(baseCoef)
-            self.baseCoef = np.array([int(i) for i in numStr])
+            self.baseCoef = np.matrix([int(i) for i in numStr])
 
     def __repr__(self):
         return str(self.baseCoef)
 
-    # TODO: vectorize
-    def __argmin_s(self, x, base, power) -> "[min,arg_min]":
+    def argmin_s(self, x, base, power) -> "[min,arg_min]":
 
         minVal, lastMinVal = 1, 1
         fundamental = base ** power
@@ -39,15 +38,12 @@ class HeftyNumber:
     def baseVect(self, base, n):
         num = [1]
 
-        if n == 1:
-            return np.array(num)
-        else:
-            r = 1
-            for i in range(n):
-                r = base * r
-                num = [r] + num
+        r = 1
+        for i in range(n):
+            r = base * r
+            num = [r] + num
 
-            return np.matrix(num)
+        return np.matrix(num)
 
     #TODO: vectorize
     def b10bn(self,b10Num, base) -> "ndarry":
@@ -55,7 +51,7 @@ class HeftyNumber:
             return np.ones(b10Num)
 
         logNum = math.log(b10Num, base)
-        num = []
+        num    = []
 
         if logNum == 1:
             nDigits = 2
@@ -68,15 +64,15 @@ class HeftyNumber:
 
         num.append(b10Num)
 
-        return np.array(num)
+        return np.matrix(num)
 
     def b10(self):
-        rVect = self.baseVect(self.base, self.baseCoef .shape[0] - 1)
+        rVect = self.baseVect(self.base, self.baseCoef.shape[1] - 1)
         return self.baseCoef * rVect.T
 
     def bn(self, n):
-        b10Vect = self.b10()
-        return self.b10bn(b10Vect,n)
+        b10Num = int(self.b10())
+        return self.b10bn(b10Num,n)
 
     def add(self, quantity):
         pass
