@@ -1,6 +1,6 @@
 <p align="center">
   <img src="hn_logo.png"><br/>
-  <img src="https://travis-ci.org/Andrewnetwork/HeftyNumber.svg?branch=master">
+  [![Build Status](https://travis-ci.org/Andrewnetwork/HeftyNumber.svg?branch=master)](https://travis-ci.org/Andrewnetwork/HeftyNumber)
 </p>
 
 HeftyNumber is a library built upon Numpy for doing arithmetic in arbitrary bases with arbitrary precision. 
