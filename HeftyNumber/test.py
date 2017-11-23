@@ -17,5 +17,4 @@ from HeftyNumber import HeftyNumber
 #print(z)
 #print(z.bn(10))
 
-a = HeftyNumber(10,[2,3])
-print(a)
+a = HeftyNumber(10,499)
