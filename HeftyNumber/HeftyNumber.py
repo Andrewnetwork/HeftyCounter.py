@@ -2,36 +2,63 @@ import numpy as np
 import math
 
 class HeftyNumber:
-    def __init__(self,baseCoef:"[2,3] = 23"=[0],base:"integer base"=10):
+    def __init__(self,baseCoef=0,base:"integer base"=10):
         self.base = base
 
-        if type(baseCoef) is list:
-            self.baseCoef = np.matrix(baseCoef)
+        if type(baseCoef) is not int:
+            self.baseCoef = baseCoef
         else:
-            numStr = str(baseCoef)
-            self.baseCoef = np.matrix([int(i) for i in numStr])
+            self.baseCoef = self.b10bn(baseCoef, base)
+
+        self.base10 = self.__toB10()
 
     def __repr__(self):
-        return str(self.baseCoef)
+        return str(self.baseCoef)+"b"+str(self.base)
+
+    def __add__(self, heftyNum):
+        return self.base10 + heftyNum.base10
+
+    def __toB10(self):
+        rVect = self.baseVect(self.base, self.baseCoef.shape[1] - 1)
+        return self.baseCoef * rVect.T
+
+    #### Digit access
+    def __getitem__(self,idx):
+        return self.baseCoef.item(self.baseCoef.shape[1]-1-idx)
+
+    def __setitem__(self):
+        pass
+
+    def __delitem__(self):
+        pass
+    #####
+
+    def plus(self,heftyNum,newBase=10):
+        if type(heftyNum) is HeftyNumber:
+            return HeftyNumber(self.b10bn(self.base10 + heftyNum.base10, newBase),newBase)
+        else:
+            return HeftyNumber(self.b10bn(self.base10 + heftyNum, newBase), newBase)
 
     def argmin_s(self, x, base, power) -> "[min,arg_min]":
-
-        minVal, lastMinVal = 1, 1
         fundamental = base ** power
+        argMin = int(x/fundamental)
+        min = int(argMin * fundamental)
 
-        for i in range(0, base):
-            minVal = x - fundamental * i
+        return [x - min, argMin]
 
-            if (minVal < 0):
-                return [lastMinVal, i - 1]
-            if (minVal == 0):
-                return [minVal, i]
+    def powerVect(self,base, len):
+        num = [1]
 
-            lastMinVal = minVal
+        if len == 1:
+            return np.array(num)
+        else:
+            r = 1
+            for i in range(len-1):
+                r = base * r
+                num = [r] + num
 
-        return [minVal, i]
+            return np.matrix(num)
 
-    #TODO: vectorize
     def subtract(self,vect,scalar):
         pass
 
@@ -45,16 +72,15 @@ class HeftyNumber:
 
         return np.matrix(num)
 
-    #TODO: vectorize
     def b10bn(self,b10Num, base) -> "ndarry":
         if (base == 1):
             return np.ones(b10Num)
 
-        logNum = math.log(b10Num, base)
+        logNum = math.log10(b10Num)/math.log10(base)
         num    = []
 
-        if logNum == 1:
-            nDigits = 2
+        if logNum % 1 == 0:
+            nDigits = int(logNum) + 1
         else:
             nDigits = math.ceil(logNum)
 
@@ -67,12 +93,8 @@ class HeftyNumber:
         return np.matrix(num)
 
     def b10(self):
-        rVect = self.baseVect(self.base, self.baseCoef.shape[1] - 1)
-        return self.baseCoef * rVect.T
+        return self.base10
 
     def bn(self, n):
         b10Num = int(self.b10())
         return self.b10bn(b10Num,n)
-
-    def add(self, quantity):
-        pass

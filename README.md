@@ -12,11 +12,13 @@ numerical optimization.
 
 ## Features
 * Effortless base conversion. ✅
-* Vector representation of large numbers. ❌
+* Vector representation of large numbers. ✅
 * Ability to count in any base. ❌
 
 ## Basic Usage
-```
+
+### Converting a number to any base. 
+```python
 k = 930929309293092930929309293092930929829823832898398239238298323832328398329839283982938928398329839829839829389283
 a = HeftyNumber(k,base=10)
 
@@ -34,7 +36,25 @@ Result:
   1 0 0 1 1 0 1 0 0 1 1 0 0 0 0 0 0 1 0 0 1 1 0 1 1 0 0 1 0 1 0 0 0 1 1 0 1
   1 1 1 0 1 1 1 0 0 0 1 1 1 1 0 1 0 0 0 0 1 0 0 1 0 1 1 1 0 0 0 1 0 1 1 1 0
   0 1 0 1 0 0 0 1 1 0 1 1 0 1 1 0 0 1 0 1 1 1 0 0 0 1 0 0 0 1 1 1 0 0 1 1 1
-  1 1 1 1 0 0 0 1 1]]
+  1 1 1 1 0 0 0 1 1]]b2
+```
+### Adding numbers of different bases and converting to a mutual base. 
+```python
+a = HeftyNumber(1000,base=2)
+z = HeftyNumber(500,base=94)
+
+print(a)
+print(z)
+print("+")
+#Add a to z and convert to base 500
+print(a.plus(z,500))
+
+Result:
+[[1 1 1 1 1 0 1 0 0 0]]b2
++
+[[ 5 30]]b94
+=
+[[1 5 0 0]]b10
 ```
 
 ## Install 

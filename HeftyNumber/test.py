@@ -18,8 +18,12 @@ from HeftyNumber import HeftyNumber
 #print(z.bn(10))
 
 k = 930929309293092930929309293092930929829823832898398239238298323832328398329839283982938928398329839829839829389283
-a = HeftyNumber(k,base=10)
-print(a.bn(2))
+a = HeftyNumber(1000,base=2)
+z = HeftyNumber(500,base=94)
+#f = HeftyNumber(k,base=1000000000000000)
 
-
-
+print(a)
+print("+")
+print(z)
+print("=")
+print(a.plus(z,10))
