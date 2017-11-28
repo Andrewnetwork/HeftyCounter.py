@@ -7,5 +7,5 @@ setup(
    author='Andrew Riberio',
    author_email='andrew@kexp.io',
    packages=['HeftyNumber'],  #same as name
-   install_requires=['numpy','math'], #external packages as dependencies
+   install_requires=['numpy'], #external packages as dependencies
 )
