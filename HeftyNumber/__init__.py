@@ -6,3 +6,5 @@ Andrew@KEXP.io
 """
 
 from HeftyNumber import HeftyNumber
+from DigitUtils import DigitUtils
+from MatrixCount import MatrixCount

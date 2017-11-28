@@ -12,6 +12,12 @@ class HeftyNumber:
 
         self.base10 = self.__toB10()
 
+    #TODO: add support for hefty number +=
+    def __iadd__(self, rhs):
+        self.base10 += rhs
+        self.baseCoef = self.b10bn(int(self.base10), self.base)
+        return self
+
     def __repr__(self):
         return str(self.baseCoef)+"b"+str(self.base)
 
@@ -75,6 +81,10 @@ class HeftyNumber:
     def b10bn(self,b10Num, base) -> "ndarry":
         if (base == 1):
             return np.ones(b10Num)
+        if (b10Num == 0):
+            return np.matrix([[0]])
+        if (b10Num == 1):
+            return np.matrix([[1]])
 
         logNum = math.log10(b10Num)/math.log10(base)
         num    = []
@@ -92,9 +102,30 @@ class HeftyNumber:
 
         return np.matrix(num)
 
+    def n(self):
+        return self.baseCoef.shape[1]
+
+    def paddedNum(self,len,paddingNum=0):
+        paddedM = np.matrix(self.baseCoef)
+        nPadd   = len-paddedM.shape[1]
+
+        for i in range(nPadd):
+            paddedM = np.insert(paddedM,0,paddingNum)
+
+        return paddedM
+
     def b10(self):
-        return self.base10
+        return int(self.base10)
 
     def bn(self, n):
-        b10Num = int(self.b10())
+        b10Num = self.b10()
         return self.b10bn(b10Num,n)
+
+    def map2Lex(self,translationDict={0:'a',1:'b',2:'c',3:'d'}):
+        map = []
+        for i in np.nditer(self.baseCoef):
+            map.append(translationDict[int(i)])
+
+        return np.matrix(map)
+
+
