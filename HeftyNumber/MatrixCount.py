@@ -1,5 +1,5 @@
 import numpy as np
-from HeftyNumber import HeftyNumber
+from HeftyNumber.HeftyNumber import HeftyNumber
 
 class MatrixCount:
     def permGroup(shape,base):
